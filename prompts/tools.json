@@ -1,0 +1,162 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "get_clinic_info",
+      "description": "Get information about clinic branches and available departments. Call this at the start if the patient asks about locations or services.",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_doctors",
+      "description": "Get list of doctors filtered by branch and/or department.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "branch": {
+            "type": "string",
+            "description": "Branch name: 'Delhi' or 'Mumbai'"
+          },
+          "department": {
+            "type": "string",
+            "description": "Department name, e.g. 'General Practice', 'Cardiology', 'Dermatology', 'Orthopedics'"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "check_availability",
+      "description": "Check available appointment slots for a given doctor/department/branch on a specific date.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "branch": {
+            "type": "string",
+            "description": "Branch name: 'Delhi' or 'Mumbai'"
+          },
+          "department": {
+            "type": "string",
+            "description": "Department name"
+          },
+          "doctor_name": {
+            "type": "string",
+            "description": "Specific doctor name (optional)"
+          },
+          "preferred_date": {
+            "type": "string",
+            "description": "Date in YYYY-MM-DD format. Today is {{current_date}}."
+          },
+          "preferred_time": {
+            "type": "string",
+            "description": "Time preference: 'morning', 'afternoon', 'evening', or a specific time like '10:00'"
+          }
+        },
+        "required": ["preferred_date"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "book_appointment",
+      "description": "Book an appointment. Only call this AFTER confirming all details with the patient.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "patient_name": {
+            "type": "string",
+            "description": "Full name of the patient"
+          },
+          "patient_phone": {
+            "type": "string",
+            "description": "Patient's phone number (with country code, e.g. +919876543210)"
+          },
+          "doctor_id": {
+            "type": "integer",
+            "description": "Doctor ID from get_doctors or check_availability results"
+          },
+          "date": {
+            "type": "string",
+            "description": "Appointment date in YYYY-MM-DD format"
+          },
+          "time": {
+            "type": "string",
+            "description": "Appointment time in HH:MM format (24-hour)"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Any notes about the reason for visit (optional)"
+          }
+        },
+        "required": ["patient_name", "patient_phone", "doctor_id", "date", "time"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_patient_appointments",
+      "description": "Fetch a patient's upcoming confirmed appointments by their phone number.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "patient_phone": {
+            "type": "string",
+            "description": "Patient's phone number with country code"
+          }
+        },
+        "required": ["patient_phone"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "reschedule_appointment",
+      "description": "Reschedule an existing appointment to a new date and time.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "appointment_id": {
+            "type": "integer",
+            "description": "The appointment ID from get_patient_appointments"
+          },
+          "new_date": {
+            "type": "string",
+            "description": "New date in YYYY-MM-DD format"
+          },
+          "new_time": {
+            "type": "string",
+            "description": "New time in HH:MM format (24-hour)"
+          }
+        },
+        "required": ["appointment_id", "new_date", "new_time"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "cancel_appointment",
+      "description": "Cancel an existing appointment.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "appointment_id": {
+            "type": "integer",
+            "description": "The appointment ID from get_patient_appointments"
+          }
+        },
+        "required": ["appointment_id"]
+      }
+    }
+  }
+]
