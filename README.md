@@ -24,7 +24,7 @@ Built for the **2care.ai Voice AI Engineer engineering assignment**.
 ### 1. Clone and install
 
 ```bash
-git clone <repo>
+git clone https://github.com/devanshtyagi13/voice-ai-receptionist.git
 cd voice-ai-receptionist
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
@@ -122,9 +122,9 @@ Patient call
      │
      ▼
   Vapi (voice platform)
-  ├── STT: Deepgram Nova-2 (hi, smartFormat)
-  ├── LLM: Claude Sonnet via Anthropic
-  └── TTS: ElevenLabs (Nadia)
+  ├── STT: Deepgram Nova-2 (multi-language, smartFormat)
+  ├── LLM: Llama 3.3 70B via Groq
+  └── TTS: ElevenLabs
      │
      ▼ tool calls
   FastAPI backend (this repo)
